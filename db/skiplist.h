@@ -9,7 +9,7 @@ template <typename Key, class Comparator>
 class SkipList {
  private:
   struct Node; // 声明一下，在后面定义public:
-  
+
  public:
   explicit SkipList(Comparator cmp); // 使用 cmp 比较 skiplist 中的 node
 
@@ -17,8 +17,23 @@ class SkipList {
   SkipList &operator=(const SkipList &) = delete;
 
   void Insert(const Key &key);
-
   bool Contains(const Key &key) const;
+
+  class Iterator {
+   public:
+    explicit Iterator(const SkipList* sl);
+    bool Valid() const;
+    const Key& key() const;
+    void Next();
+    void Prev();
+    void Seek(const Key& key);
+    void SeekToFirst();
+    void SeekToLast();
+
+   private:
+    const SkipList* sl_;
+    Node* node_;
+  };
 
  private:
   int const kMaxHeight = 12; // max height
@@ -31,6 +46,8 @@ class SkipList {
   int RandomHeight();
   Node *FindGreaterOrEqual(const Key &key, Node **prev) const;
 };
+
+/*******************SkipList::Node*********************/
 
 template <typename Key, class Comparator>
 struct SkipList<Key, Comparator>::Node {
@@ -54,6 +71,43 @@ typename SkipList<Key, Comparator>::Node *
   char* const mem = (char*)malloc(sizeof(Node) - 1 + sizeof(Node *) * height);
   return new (mem) Node(key);
 }
+
+/*******************SkipList::Iterator*********************/
+
+template <typename Key, class Comparator>
+inline SkipList<Key, Comparator>::Iterator::Iterator(const SkipList* sl) {
+  sl_ = sl;
+  node_ = nullptr;
+}
+
+template <typename Key, class Comparator>
+inline bool SkipList<Key, Comparator>::Iterator::Valid() const {
+  return node_ != nullptr;
+}
+
+template <typename Key, class Comparator>
+inline const Key& SkipList<Key, Comparator>::Iterator::key() const {
+  assert(Valid());
+  return node_->key;
+}
+
+template <typename Key, class Comparator>
+inline void SkipList<Key, Comparator>::Iterator::Next() {
+  assert(Valid());
+  node_ = node_->Next(0); // 0 height 的 Next Node 肯定是连续的
+}
+
+template <typename Key, class Comparator>
+inline void SkipList<Key, Comparator>::Iterator::Prev() {
+  // TODO 先不实现，感觉没啥用
+}
+
+template <typename Key, class Comparator>
+inline void SkipList<Key, Comparator>::Iterator::Seek(const Key &key) {
+  node_ = sl_->FindGreaterOrEqual(key, nullptr);
+}
+
+/*******************SkipList*********************/
 
 template <typename Key, class Comparator>
 SkipList<Key, Comparator>::SkipList(Comparator cmp)
@@ -99,12 +153,27 @@ typename SkipList<Key, Comparator>::Node *
 
 template <typename Key, class Comparator>
 bool SkipList<Key, Comparator>::Contains(const Key &key) const {
-  return true;
+  Node* node = FindGreaterOrEqual(key, nullptr);
+  if (node != nullptr && comparator_.Compare(node->key, key) == 0) {
+    return true;
+  }
+  return false;
 }
 
 template <typename Key, class Comparator>
 void SkipList<Key, Comparator>::Insert(const Key &key) {
-  return;
+  Node* prev[kMaxHeight];
+  Node* node = FindGreaterOrEqual(key, prev);
+
+  assert(node == nullptr || !(comparator_.Compare(node->key, key) == 0));
+
+  int height = RandomHeight();
+  node = NewNode(key, height);
+
+  for (int i=0; i < height; i++) {
+    node->SetNext(i, prev[i]->Next(i));
+    prev[i]->SetNext(i, node);
+  }
 }
 
 } // namespace velevdb
