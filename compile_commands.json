@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/norris/projects/c/velevdb/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/velevdb.dir/db/velevdbutil.cc.o -c /Users/norris/projects/c/velevdb/db/velevdbutil.cc",
+  "file": "/Users/norris/projects/c/velevdb/db/velevdbutil.cc"
+}
+]
