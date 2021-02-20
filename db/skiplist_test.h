@@ -1,3 +1,6 @@
+#ifndef VELEVDB_DB_SKIPLIST_TEST_H_
+#define VELEVDB_DB_SKIPLIST_TEST_H_
+
 #include <gtest/gtest.h>
 #include "skiplist.h"
 
@@ -5,8 +8,8 @@ namespace velevdb {
 
 class IntComparator : public Comparator {
  public:
-  int Compare(const int& a, const int& b) const;
-  int Compare(const std::string& a, const std::string& b) const {return 0;};
+  int Compare(const int &a, const int &b) const;
+  int Compare(const std::string &a, const std::string &b) const { return 0; };
 };
 
 int IntComparator::Compare(const int &a, const int &b) const {
@@ -61,7 +64,4 @@ TEST(SkipTest, InsertAndLookup) {
 
 }; // namespace velevdb
 
-int main(int argc, char *argv[]) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
+#endif // VELEVDB_DB_SKIPLIST_TEST_H_

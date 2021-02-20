@@ -22,7 +22,7 @@ class MemTable {
   bool Get(const InternalKey& key, string* value);
 
  private:
-  SkipList<const char*> table_;
+  SkipList<const char*, InternalKeyComparator> table_;
   InternalKeyComparator comparator_;
 };
 } // namespace velevdb

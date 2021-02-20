@@ -11,7 +11,7 @@ class Comparator {
   virtual int Compare(const std::string& a, const std::string& b) const = 0;
 };
 
-Comparator::~Comparator() = default;
+inline Comparator::~Comparator() = default;
 
 }
 

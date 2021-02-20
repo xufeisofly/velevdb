@@ -13,7 +13,7 @@ class SkipList {
  public:
   explicit SkipList(Comparator cmp); // 使用 cmp 比较 skiplist 中的 node
 
-  SkipList(const SkipList &) = delete;
+  SkipList(const SkipList&) = delete;
   SkipList &operator=(const SkipList &) = delete;
 
   void Insert(const Key &key);
@@ -21,21 +21,21 @@ class SkipList {
 
   class Iterator {
    public:
-    explicit Iterator(const SkipList* sl);
+    explicit Iterator(const SkipList *sl);
     bool Valid() const;
-    const Key& key() const;
+    const Key &key() const;
     void Next();
     void Prev();
-    void Seek(const Key& key);
+    void Seek(const Key &key);
     void SeekToFirst();
     void SeekToLast();
 
    private:
-    const SkipList* sl_;
-    Node* node_;
+    const SkipList *sl_;
+    Node *node_;
   };
 
- private:
+private:
   int const kMaxHeight = 12; // max height
   Node *const head_;         // 跳表的私有变量就是一个 head
   Comparator const comparator_;
