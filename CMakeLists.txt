@@ -23,28 +23,25 @@ endif(NOT CMAKE_CXX_STANDARD)
 SET(BASEPATH "/Users/norris/projects/c/velevdb")
 INCLUDE_DIRECTORIES("${BASEPATH}")
 
-# include_directories(/Users/norris/projects/c/util)
-# link_directories(/Users/norris/projects/leveldb/build)
 
-add_executable(velevdb "db/velevdbutil.cc")
+# 收集目录下所有的源文件，用于后面编译
+aux_source_directory(db DIR_SRCS)
+
+# add_executable(velevdb ${DIR_SRCS})
 
 
+# gtest 测试
 # 查找 GTest 库
 find_package(GTest REQUIRED)
 # GTest 的头文件
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(skiplisttest "db/skiplist_test.cc")
+add_executable(testall ${DIR_SRCS})
 
-target_link_libraries(skiplisttest
+target_link_libraries(testall
   ${GTEST_BOTH_LIBRARIES}
   pthread)
 
-gtest_discover_tests(skiplisttest)
+gtest_discover_tests(testall)
 
 enable_testing()
-
-# 指定生成目标
-
-# target_link_libraries(Demo leveldb)
-# target_link_libraries(Demo snappy)

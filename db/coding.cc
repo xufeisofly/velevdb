@@ -9,4 +9,4 @@ void PutFixed64(std::string *dst, uint64_t value) {
   dst->append(buf, sizeof(buf));
 }
 
-}
+} // namespace velevdb

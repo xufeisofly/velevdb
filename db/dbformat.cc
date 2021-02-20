@@ -1,5 +1,7 @@
 #include "dbformat.h"
 #include "coding.h"
+#include <iostream>
+
 
 namespace velevdb {
 
@@ -26,9 +28,13 @@ std::string InternalKey::user_key() const {
   return ExtractUserKey(rep_);
 }
 
+SequenceNumber InternalKey::seq_n_type() const {
+  return ExtrackSequenceNumberWithType(rep_);
+}
+
 /******** InternalKeyComparator *******/
 
-int InternalKeyComparator::Compare(const std::string& a, const std::string& b) const {
+int InternalKeyComparator::Compare(const std::string &a, const std::string &b) const {
   return 0;
 }
 

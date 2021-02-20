@@ -22,6 +22,21 @@ inline void EncodeFixed64(char* dst, uint64_t value) {
   buffer[7] = static_cast<uint8_t>(value >> 56);
 };
 
+// DecodeFixed64 把 char* 转换成 uint64_t 类型
+// 原理：先转成 uint8*，然后再放大成 uint64
+inline uint64_t DecodeFixed64(const char* ptr) {
+  const uint8_t* const buffer = reinterpret_cast<const uint8_t*>(ptr);
+
+  return (static_cast<uint64_t>(buffer[0])) |
+         (static_cast<uint64_t>(buffer[1]) << 8) |
+         (static_cast<uint64_t>(buffer[2]) << 16) |
+         (static_cast<uint64_t>(buffer[3]) << 24) |
+         (static_cast<uint64_t>(buffer[4]) << 32) |
+         (static_cast<uint64_t>(buffer[5]) << 40) |
+         (static_cast<uint64_t>(buffer[6]) << 48) |
+         (static_cast<uint64_t>(buffer[7]) << 56);
+}
+
 }
 
 #endif // VELEVDB_DB_CODING_H_
