@@ -5,6 +5,7 @@
 #include "coding.h"
 
 namespace velevdb {
+
 // SequenceNumber MVCC 的版本号
 typedef uint64_t SequenceNumber;
 // 定义最大的 SequenceNumber，不超过 56bit
@@ -27,6 +28,9 @@ inline SequenceNumber ExtrackSequenceNumberWithType(const std::string& internal_
   return DecodeFixed64(data + size - 8);
 }
 
+int BytewiseCompare(const std::string &a, const std::string &b);
+
+
 // internal key 需要包裹在这个类中，不要直接用 std::string，这样比较 key
 // 的时候就不会直接使用 std::string 的比较器了
 class InternalKey {
@@ -45,17 +49,12 @@ class InternalKey {
   SequenceNumber seq_n_type() const;
 };
 
-
 class InternalKeyComparator : public Comparator {
  public:
+  InternalKeyComparator() = default;
   int Compare(const InternalKey& a, const InternalKey& b) const;
   int Compare(const std::string& a, const std::string& b) const override;
 };
-
-inline int InternalKeyComparator::Compare(const InternalKey& a, const InternalKey& b) const {
-  // 比较 internal key encode 成 std::string 后的值
-  return Compare(a.Encode(), b.Encode());
-}
 
 } // namespace velevdb
 

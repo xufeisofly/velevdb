@@ -34,6 +34,36 @@ SequenceNumber InternalKey::seq_n_type() const {
 
 /******** InternalKeyComparator *******/
 
+// BytewiseCompare 比较 string 大小，这样就不用再单独搞个 BytewiseComparator 了
+int BytewiseCompare(const std::string& a, const std::string& b) {
+  size_t a_size = a.size();
+  size_t b_size = b.size();
+  const size_t min_len = (a_size < b_size) ? a_size : b_size;
+  int r = memcmp(a.data(), b.data(), min_len);
+  if (r == 0) {
+    if (a_size < b_size)
+      r = -1;
+    else if (a_size > b_size)
+      r = +1;
+  }
+  return r;
+}
+
+// Compare 比较 InternalKey，先比较 user_key 部分，如果一样再比较 sequence number，谁大谁就小
+int InternalKeyComparator::Compare(const InternalKey &a, const InternalKey &b) const {
+  int r = BytewiseCompare(a.Encode(), b.Encode());
+  if (r == 0) {
+    const uint64_t aseq = a.seq_n_type();
+    const uint64_t bseq = b.seq_n_type();
+    if (aseq > bseq)
+      r = -1;
+    else if (aseq < bseq)
+      r = +1;
+  }
+  return r;
+}
+
+// TODO 感觉没什么用了
 int InternalKeyComparator::Compare(const std::string &a, const std::string &b) const {
   return 0;
 }
