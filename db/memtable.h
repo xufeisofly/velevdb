@@ -16,6 +16,8 @@ class MemTable {
   MemTable &operator=(const MemTable&) = delete;
   ~MemTable();
 
+  // TODO Iterator
+
   void Add(SequenceNumber seq, ValueType type, const string& key,
            const string& value);
 

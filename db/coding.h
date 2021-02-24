@@ -7,9 +7,11 @@
 namespace velevdb {
 
 void PutFixed64(std::string* dst, uint64_t value);
+int VarintLength(uint64_t v);
+char *EncodeVarint32(char *dst, uint32_t v);
 
 // EncodeFixed64 将 uint64_t 写入到 8 个 byte 中
-inline void EncodeFixed64(char* dst, uint64_t value) {
+inline void EncodeFixed64(char *dst, uint64_t value) {
   uint8_t* buffer = reinterpret_cast<uint8_t*>(dst);
 
   buffer[0] = static_cast<uint8_t>(value);
