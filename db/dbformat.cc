@@ -68,6 +68,20 @@ int InternalKeyComparator::Compare(const std::string &a, const std::string &b) c
   return 0;
 }
 
+LookupKey::LookupKey(const std::string& user_key, SequenceNumber s) {
+  size_t usize = user_key.size();
+  char* dst; // TODO 不用手动分配内存吗，当成变长数组使用？
+
+  start_ = dst;
+  dst = EncodeVarint32(dst, usize + 8);
+  kstart_ = dst;
+  std::memcpy(dst, user_key.data(), usize);
+  dst += usize;
+  EncodeFixed64(dst, PackSequenceAndType(s, kTypeValue));
+  dst += 8;
+  end_ = dst;
+}
+
 }
 
 

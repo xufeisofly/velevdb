@@ -56,6 +56,23 @@ class InternalKeyComparator : public Comparator {
   int Compare(const std::string& a, const std::string& b) const override;
 };
 
+class LookupKey {
+ public:
+  LookupKey(const std::string& user_key, SequenceNumber sequence);
+  LookupKey(const LookupKey&) = delete;
+  LookupKey& operator=(const LookupKey&) = delete;
+  ~LookupKey();
+
+  std::string memtable_key() const { return std::string(start_, end_ - start_); }
+  std::string internal_key() const { return std::string(kstart_, end_ - kstart_); }
+  std::string user_key() const { return std::string(kstart_, end_ - kstart_ - 8); }
+
+ private:
+  const char* start_;
+  const char* kstart_;
+  const char* end_;
+};
+
 } // namespace velevdb
 
 #endif // VELEVDB_DB_DBFORMAT_H_

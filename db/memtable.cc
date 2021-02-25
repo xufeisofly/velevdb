@@ -1,11 +1,16 @@
 #include "memtable.h"
 #include "coding.h"
+#include "iterator.h"
 
 namespace velevdb {
 
 MemTable::MemTable(const InternalKeyComparator& comparator) : comparator_(comparator), table_(comparator) {}
 
 MemTable::~MemTable() {}
+
+class MemTableIterator : public Iterator {
+ public:
+};
 
 void MemTable::Add(SequenceNumber seq, ValueType type, const string &key, const string &value) {
   // format an entry:
@@ -42,7 +47,9 @@ void MemTable::Add(SequenceNumber seq, ValueType type, const string &key, const 
   return;
 }
 
-bool MemTable::Get(const InternalKey &key, string *value) {
+bool MemTable::Get(const LookupKey &key, string *value) {
+  std::string memkey = key.memtable_key();
+  
   return false;
 }
 }

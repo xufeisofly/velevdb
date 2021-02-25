@@ -3,6 +3,7 @@
 
 #include "dbformat.h"
 #include "skiplist.h"
+#include "iterator.h"
 #include <string>
 
 using namespace std;
@@ -17,16 +18,20 @@ class MemTable {
   ~MemTable();
 
   // TODO Iterator
+  Iterator* NewIterator();
 
   void Add(SequenceNumber seq, ValueType type, const string& key,
            const string& value);
 
-  bool Get(const InternalKey& key, string* value);
+  bool Get(const LookupKey& key, string* value);
 
  private:
-  SkipList<const char*, InternalKeyComparator> table_;
+  typedef SkipList<const char *, InternalKeyComparator> Table;
+
+  Table table_;
   InternalKeyComparator comparator_;
 };
+
 } // namespace velevdb
 
 #endif // VELEVDB_DB_MEMTABLE_H_
