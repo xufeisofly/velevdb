@@ -73,6 +73,10 @@ class LookupKey {
   const char* end_;
 };
 
+inline LookupKey::~LookupKey() {
+  delete [] start_;
+}
+
 } // namespace velevdb
 
 #endif // VELEVDB_DB_DBFORMAT_H_

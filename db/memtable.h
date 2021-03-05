@@ -26,6 +26,7 @@ class MemTable {
   bool Get(const LookupKey& key, string* value);
 
  private:
+  friend class MemTableIterator;
   typedef SkipList<const char *, InternalKeyComparator> Table;
 
   Table table_;

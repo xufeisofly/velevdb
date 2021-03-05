@@ -18,7 +18,7 @@ class Iterator {
 
   virtual void SeekToFirst() = 0;
 
-  virtual void SeekTolast() = 0;
+  virtual void SeekToLast() = 0;
 
   virtual void Seek(const std::string& target) = 0;
 
