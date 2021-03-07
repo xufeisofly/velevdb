@@ -49,11 +49,6 @@ int BytewiseCompare(const std::string& a, const std::string& b) {
   return r;
 }
 
-// Compare 比较 InternalKey，先比较 user_key 部分，如果一样再比较 sequence number，谁大谁就小
-int InternalKeyComparator::Compare(const InternalKey &a, const InternalKey &b) const {
-  return Compare(a.Encode(), b.Encode());
-}
-
 // Compare MemTable 实际调用的是它，因为构造时 char* 会自动转成 string
 int InternalKeyComparator::Compare(const std::string &a, const std::string &b) const {
   int r = BytewiseCompare(ExtractUserKey(a), ExtractUserKey(b));

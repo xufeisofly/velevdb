@@ -18,6 +18,15 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 11)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_CXX_EXTENSIONS OFF)
+
+  # set(CMAKE_CXX_COMPILER      "gcc" )         # 显示指定使用的C++编译器
+
+  # set(CMAKE_CXX_FLAGS   "-std=c++11")             # c++11
+  # set(CMAKE_CXX_FLAGS   "-g")                     # 调试信息
+  # set(CMAKE_CXX_FLAGS   "-Wall")                  # 开启所有警告
+
+  # set(CMAKE_CXX_FLAGS_DEBUG   "-O0" )             # 调试包不优化
+  # set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG " )   # release包优化
 endif(NOT CMAKE_CXX_STANDARD)
 
 SET(BASEPATH "/Users/norris/projects/c/velevdb")
@@ -27,7 +36,7 @@ INCLUDE_DIRECTORIES("${BASEPATH}")
 # 收集目录下所有的源文件，用于后面编译
 aux_source_directory(db DIR_SRCS)
 
-# add_executable(velevdb ${DIR_SRCS})
+add_executable(debug "db/debug.cc" "db/coding.cc" "db/dbformat.cc" "db/memtable.cc")
 
 
 # gtest 测试
@@ -36,6 +45,7 @@ find_package(GTest REQUIRED)
 # GTest 的头文件
 include_directories(${GTEST_INCLUDE_DIRS})
 
+list(REMOVE_ITEM DIR_SRCS "db/debug.cc")
 add_executable(testall ${DIR_SRCS})
 
 target_link_libraries(testall
