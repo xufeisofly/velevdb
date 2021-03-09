@@ -60,7 +60,7 @@ int InternalKeyComparator::Compare(const std::string &a, const std::string &b) c
     else if (aseq < bseq)
       r = +1;
   }
-  return 0;
+  return r;
 }
 
 LookupKey::LookupKey(const std::string& user_key, SequenceNumber s) {

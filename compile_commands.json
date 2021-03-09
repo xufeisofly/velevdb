@@ -1,22 +1,42 @@
 [
 {
   "directory": "/Users/norris/projects/c/velevdb/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/coding.cc.o -c /Users/norris/projects/c/velevdb/db/coding.cc",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/coding.cc.o -c /Users/norris/projects/c/velevdb/db/coding.cc",
   "file": "/Users/norris/projects/c/velevdb/db/coding.cc"
 },
 {
   "directory": "/Users/norris/projects/c/velevdb/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/dbformat.cc.o -c /Users/norris/projects/c/velevdb/db/dbformat.cc",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/dbformat.cc.o -c /Users/norris/projects/c/velevdb/db/dbformat.cc",
   "file": "/Users/norris/projects/c/velevdb/db/dbformat.cc"
 },
 {
   "directory": "/Users/norris/projects/c/velevdb/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/memtable.cc.o -c /Users/norris/projects/c/velevdb/db/memtable.cc",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/memtable.cc.o -c /Users/norris/projects/c/velevdb/db/memtable.cc",
   "file": "/Users/norris/projects/c/velevdb/db/memtable.cc"
 },
 {
   "directory": "/Users/norris/projects/c/velevdb/build",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/testall.cc.o -c /Users/norris/projects/c/velevdb/db/testall.cc",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/testall.dir/db/testall.cc.o -c /Users/norris/projects/c/velevdb/db/testall.cc",
   "file": "/Users/norris/projects/c/velevdb/db/testall.cc"
+},
+{
+  "directory": "/Users/norris/projects/c/velevdb/build",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/debug.dir/db/debug.cc.o -c /Users/norris/projects/c/velevdb/db/debug.cc",
+  "file": "/Users/norris/projects/c/velevdb/db/debug.cc"
+},
+{
+  "directory": "/Users/norris/projects/c/velevdb/build",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/debug.dir/db/coding.cc.o -c /Users/norris/projects/c/velevdb/db/coding.cc",
+  "file": "/Users/norris/projects/c/velevdb/db/coding.cc"
+},
+{
+  "directory": "/Users/norris/projects/c/velevdb/build",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/debug.dir/db/dbformat.cc.o -c /Users/norris/projects/c/velevdb/db/dbformat.cc",
+  "file": "/Users/norris/projects/c/velevdb/db/dbformat.cc"
+},
+{
+  "directory": "/Users/norris/projects/c/velevdb/build",
+  "command": "g++  -I/Users/norris/projects/c/velevdb -g -O0 -std=c++11 -o CMakeFiles/debug.dir/db/memtable.cc.o -c /Users/norris/projects/c/velevdb/db/memtable.cc",
+  "file": "/Users/norris/projects/c/velevdb/db/memtable.cc"
 }
 ]

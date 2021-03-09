@@ -52,15 +52,16 @@ class InternalKey {
 class InternalKeyComparator : public Comparator {
  public:
   explicit InternalKeyComparator() = default;
-  
+
   int Compare(const std::string &a, const std::string &b) const override;
-  int Compare2(const InternalKey& a, const InternalKey& b) const;
+  int Compare(const InternalKey& a, const InternalKey& b) const;
 };
 
 // Compare 比较 InternalKey，先比较 user_key 部分，如果一样再比较 sequence
 // number，谁大谁就小
-inline int InternalKeyComparator::Compare2(const InternalKey &a,                                    const InternalKey &b) const {
-  return Compare("a", "b");
+inline int InternalKeyComparator::Compare(const InternalKey &a,
+                                          const InternalKey &b) const {
+  return Compare(a.Encode(), b.Encode());
 }
 
 class LookupKey {
