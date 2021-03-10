@@ -2,6 +2,7 @@
 
 #include "skiplist_test.h"
 #include "dbformat_test.h"
+#include "memtable_test.h"
 
 namespace velevdb {
 

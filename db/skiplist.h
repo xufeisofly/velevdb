@@ -107,6 +107,16 @@ inline void SkipList<Key, Comparator>::Iterator::Seek(const Key &key) {
   node_ = sl_->FindGreaterOrEqual(key, nullptr);
 }
 
+template <typename Key, class Comparator>
+inline void SkipList<Key, Comparator>::Iterator::SeekToFirst() {
+  
+}
+
+template <typename Key, class Comparator>
+inline void SkipList<Key, Comparator>::Iterator::SeekToLast() {
+  
+}
+
 /*******************SkipList*********************/
 
 template <typename Key, class Comparator>
