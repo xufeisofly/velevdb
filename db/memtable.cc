@@ -59,8 +59,8 @@ void MemTable::Add(SequenceNumber seq, ValueType type, const string &key, const 
   const size_t encoded_len = VarintLength(internal_key_size) + internal_key_size +
       VarintLength(value_size) + value_size;
 
-  // 分配内存
-  char* buf;
+  // TODO 分配内存，这里不太对，初始化内存为 0x01，不可写
+  char* buf = new char[encoded_len];
   // buf 中放 internal_key_size
   char* p = EncodeVarint32(buf, internal_key_size);
   // buf 中放 key data
@@ -96,7 +96,9 @@ bool MemTable::Get(const LookupKey &key, string *value) {
     uint32_t key_length; // internal_key_size
     const char* key_ptr = GetVarint32Ptr(entry, entry + 5, &key_length);
 
-    if (comparator_.Compare(std::string(key_ptr, key_length - 8), key.user_key()) == 8) {
+    std::string a = std::string(key_ptr, key_length);
+    std::string b = key.internal_key();
+    if (comparator_.Compare(a,b) == 0) {
       const uint64_t tag = DecodeFixed64(key_ptr + key_length - 8);
 
       switch (static_cast<ValueType>(tag & 0xff)) {

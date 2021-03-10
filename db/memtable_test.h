@@ -7,11 +7,17 @@
 
 namespace velevdb {
 
-TEST(MemTableTest, Add) {
+TEST(MemTableTest, AddandGet) {
   InternalKeyComparator cmp;
   MemTable memtable(cmp);
 
   memtable.Add(1000, kTypeValue, "key1", "value1");
+  std::string value;
+  LookupKey lukey("key1", 1000);
+  bool r = memtable.Get(lukey, &value);
+
+  ASSERT_EQ(true, r);
+  ASSERT_EQ("value1", value);
 }
 
 }

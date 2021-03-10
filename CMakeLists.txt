@@ -19,7 +19,7 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_CXX_EXTENSIONS OFF)
 
-  set(CMAKE_CXX_COMPILER      "g++" )         # 显示指定使用的C++编译器
+  # set(CMAKE_CXX_COMPILER      "g++" )         # 显示指定使用的C++编译器
 
   # set(CMAKE_CXX_FLAGS   "-std=c++11")             # c++11
   # set(CMAKE_CXX_FLAGS   "-g")                     # 调试信息

@@ -65,7 +65,7 @@ int InternalKeyComparator::Compare(const std::string &a, const std::string &b) c
 
 LookupKey::LookupKey(const std::string& user_key, SequenceNumber s) {
   size_t usize = user_key.size();
-  char* dst; // TODO 不用手动分配内存吗，当成变长数组使用？
+  char* dst = new char[usize + 8]; // TODO 不用手动分配内存吗，当成变长数组使用？
 
   start_ = dst;
   dst = EncodeVarint32(dst, usize + 8);
